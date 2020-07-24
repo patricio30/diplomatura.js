@@ -1,4 +1,4 @@
-document.getElementById('app').innerHTML = 'Hello World!';
+//document.getElementById('app').innerHTML = 'Hello World!';
 const MOUNTAINS = [
   { name: 'Kilimanjaro', height: 5895, place: 'Tanzania' },
   { name: 'Everest', height: 8848, place: 'Nepal' },
