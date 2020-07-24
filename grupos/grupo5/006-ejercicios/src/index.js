@@ -9,16 +9,16 @@ const MOUNTAINS = [
 ];
 
 function mostrarOcultarTablas1() {
-  mostrado = 0;
-  elem = document.getElementById('app');
+  let mostrado = 0;
+  let elem = document.getElementById('app');
   if (elem.style.display == 'block') mostrado = 1;
   elem.style.display = 'none';
   if (mostrado != 1) elem.style.display = 'block';
 }
 
 function mostrarOcultarTablas2() {
-  mostrado = 0;
-  elem = document.getElementById('tabla');
+  let mostrado = 0;
+  let elem = document.getElementById('tabla');
   if (elem.style.display == 'block') mostrado = 1;
   elem.style.display = 'none';
   if (mostrado != 1) elem.style.display = 'block';
@@ -33,41 +33,21 @@ document.getElementById('pinchable2').onclick = function () {
 };
 
 function myFunction() {
-  //obtenemos referencia del DOM
-  //const $cuerpoTabla = document.querySelector("#app");
   const cuerpoTabla = document.getElementById('app');
-
-  //let myTable= document.getElementById('table');
-  /*MOUNTAINS.forEach(element => {
-         let fila = myTable.insertRow(myTable.rows.length);
-         fila.insertCell(0).innerHTML = element.name;
-           fila.insertCell(1).innerHTML = element.height;
-          fila.insertCell(2).innerHTML = element.place;
-     });*/
 
   MOUNTAINS.forEach((element) => {
     const tr = document.createElement('tr');
-    // Creamos el <td> de nombre y lo adjuntamos a tr
     let tdNombre = document.createElement('td');
     tdNombre.textContent = element.name;
-    // el textContent del td es el nombre
     tr.appendChild(tdNombre);
-    // El td de altura
     let tdAltura = document.createElement('td');
     tdAltura.textContent = element.height;
     tr.appendChild(tdAltura);
-    // El td del sitio
     let tdSitio = document.createElement('td');
     tdSitio.textContent = element.place;
     tr.appendChild(tdSitio);
-    // Finalmente agregamos el <tr> al cuerpo de la tabla
     cuerpoTabla.appendChild(tr);
-    // Y el ciclo se repite hasta que se termina de recorrer todo el arreglo
   });
-
-  //document.createElement – Para crear un elemento, en este caso el tr y el td
-  //document.querySelector – Obtener referencia a elementos del DOM
-  //elemento.appendChild – Adjuntar un elemento hijo a otro elemento
 }
 
 function myFunction1() {
@@ -75,22 +55,16 @@ function myFunction1() {
 
   MOUNTAINS.forEach((element) => {
     const tr = document.createElement('tr');
-    // Creamos el <td> de nombre y lo adjuntamos a tr
     let tdNombre = document.createElement('td');
     tdNombre.textContent = element.name;
-    // el textContent del td es el nombre
     tr.appendChild(tdNombre);
-    // El td de altura
     let tdAltura = document.createElement('td');
     tdAltura.textContent = element.height;
     tr.appendChild(tdAltura);
-    // El td del sitio
     let tdSitio = document.createElement('td');
     tdSitio.textContent = element.place;
     tr.appendChild(tdSitio);
-    // Finalmente agregamos el <tr> al cuerpo de la tabla
     cuerpoTabla.appendChild(tr);
-    // Y el ciclo se repite hasta que se termina de recorrer todo el arreglo
   });
 }
 
@@ -102,8 +76,15 @@ const cuerpoTabla = document.getElementById('myList');
 
 TODO.forEach((element) => {
   const li = document.createElement('LI');
-  // Creamos el <td> de nombre y lo adjuntamos a tr
+  li.id = 'idLi';
+
+  const boton = document.createElement('button');
+  boton.style = 'color:red';
+  boton.textContent = 'Eliminar';
+  boton.addEventListener('click', Eliminar, true);
+
   let textnode = document.createTextNode(element);
+  li.appendChild(boton);
   li.appendChild(textnode);
   cuerpoTabla.appendChild(li);
 });
@@ -114,8 +95,23 @@ document.getElementById('agregarLista').onclick = function () {
 
 function agregLista() {
   let li = document.createElement('LI');
+  li.id = 'idLi';
+
+  const boton = document.createElement('button');
+  boton.style = 'color:red';
+  boton.textContent = 'Eliminar';
+  boton.addEventListener('click', Eliminar, true);
+
   let x = document.getElementById('myText').value;
   let t = document.createTextNode(x);
+  li.appendChild(boton);
   li.appendChild(t);
   document.getElementById('myList').appendChild(li);
 }
+
+const Eliminar = function () {
+  const list = document.getElementById('myList');
+
+  //list.removeAttribute('idLi');
+  list.removeChild(list.lastElementChild);
+};
