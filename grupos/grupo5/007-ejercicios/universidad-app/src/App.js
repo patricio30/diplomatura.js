@@ -1,5 +1,8 @@
 import React from 'react';
 import './App.css';
+import "bootstrap/dist/css/bootstrap.min.css";
+
+
 import datos from './datos';
 import Alumno from './component/Alumno';
 import Profesor from './component/Profesor';
@@ -24,12 +27,14 @@ class App extends React.Component {
 
   handleClickAlumno() {
     this.setState(state => ({
-      MostarALumno: !state.MostarALumno
+      MostarALumno: !state.MostarALumno,
+      MostrarProfesor: false
     }));
   }
   handleClickProfesor() {
     this.setState(state => ({
-      MostrarProfesor: !state.MostrarProfesor
+      MostrarProfesor: !state.MostrarProfesor,
+      MostarALumno: false
     }));
   }
 
@@ -48,10 +53,12 @@ class App extends React.Component {
           <button className="btn btn-outline-info">Calificaciones</button>
         </div>
       <>
+       
         <h2>{this.state.MostarALumno?MostarALumno:true}</h2>
         <h2>{this.state.MostrarProfesor?MostrarProfesor:true}</h2>
+      
       </>
-                       
+      
         
       </div>
     );
