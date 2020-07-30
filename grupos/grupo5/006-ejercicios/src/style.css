@@ -1,3 +1,38 @@
 body {
   font-family: sans-serif;
 }
+
+.botonAgregarLista {
+	text-decoration: none;
+	padding: 2px;
+	font-weight: 600;
+	font-size: 20px;
+	color: #ffffff;
+	background-color: #009846;
+	border-radius: 3px;
+	border: 2px solid #0016b0;
+}
+
+
+#btPinchable1{
+	text-decoration: none;
+	padding: 2px;
+	font-weight: 600;
+	font-size: 20px;
+	color: #ffffff;
+	background-color: #E8CF13;
+	border-radius: 3px;
+	border: 2px solid #0016b0;
+	
+   }
+
+   #btPinchable2{
+	text-decoration: none;
+	padding: 2px;
+	font-weight: 600;
+	font-size: 20px;
+	color: #ffffff;
+	background-color: #E813E5;
+	border-radius: 3px;
+	border: 2px solid #0016b0;
+   }
