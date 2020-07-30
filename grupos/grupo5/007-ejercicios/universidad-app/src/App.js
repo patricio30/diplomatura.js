@@ -1,62 +1,57 @@
 import React from 'react';
 import './App.css';
 import datos from './datos';
-import Alumno from './componet/Alumno';
+import Alumno from './component/Alumno';
+import Profesor from './component/Profesor';
 
 class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      
       alumnos: datos.alumnos,
       profesores: datos.profesores,
       materias: datos.materias,
       calificaciones: datos.calificaciones,
+
+      MostarALumno: false,
+      MostrarProfesor: false,
+    
      
     };
+     this.handleClickAlumno = this.handleClickAlumno.bind(this);
+     this.handleClickProfesor = this.handleClickProfesor.bind(this);
   }
+
+  handleClickAlumno() {
+    this.setState(state => ({
+      MostarALumno: !state.MostarALumno
+    }));
+  }
+  handleClickProfesor() {
+    this.setState(state => ({
+      MostrarProfesor: !state.MostrarProfesor
+    }));
+  }
+
   
   
-
-
   render() {
-    
-const vistaProfesores = <div>
-<table border="1">
-  <thead>
-      <tr>
-        <th>Id</th>
-        <th>Nombre</th>
-       </tr>
-    </thead>
-    <tbody>
-      {this.state.profesores.map((element)=>(
-        <tr>
-          <td>{element.id}</td>
-          <td>{element.nombre}</td>
-      <td><button color="danger">Eliminar</button></td>{"  "}
-        </tr>
-      ))}
-    </tbody>
-    </table>
- </div>;
-
-
+    const MostarALumno = <Alumno/>;
+    const MostrarProfesor = <Profesor/>;
     return (
       <div className="App">
-        <header className="alert alert-info">Diplomatura JS</header>
+        <header className="alert alert-info" >Diplomatura JS</header>
         <div id="botonera">
-          <button className="btn btn-outline-info" onClick={()=> this.Alumno.setVistaActual}>Alumnos</button>
-          <button className="btn btn-outline-info" onClick={()=> this.setVistaActual(vistaProfesores)}>Profesores</button>
+          <button className="btn btn-outline-info" onClick={ this.handleClickAlumno}>Alumnos</button>
+          <button className="btn btn-outline-info" onClick={ this.handleClickProfesor}>Profesores</button>
           <button className="btn btn-outline-info">Materias</button>
           <button className="btn btn-outline-info">Calificaciones</button>
         </div>
-
-          
-        
-     <div className="mainView">{Alumno.setVistaActual}</div> 
-       
-       <div className="mainView">{vistaProfesores}</div>        
+      <>
+        <h2>{this.state.MostarALumno?MostarALumno:true}</h2>
+        <h2>{this.state.MostrarProfesor?MostrarProfesor:true}</h2>
+      </>
+                       
         
       </div>
     );
