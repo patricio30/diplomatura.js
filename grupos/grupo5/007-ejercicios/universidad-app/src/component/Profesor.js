@@ -13,7 +13,6 @@ import {
 } from "reactstrap";
 
 
-
 export default class Profesor extends Component{
     constructor(props){
         super(props);

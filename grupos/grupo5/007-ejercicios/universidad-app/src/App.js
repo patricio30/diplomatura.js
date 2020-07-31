@@ -2,7 +2,6 @@ import React from 'react';
 import './App.css';
 import "bootstrap/dist/css/bootstrap.min.css";
 
-
 import datos from './datos';
 import Alumno from './component/Alumno';
 import Profesor from './component/Profesor';
@@ -18,8 +17,6 @@ class App extends React.Component {
 
       MostarALumno: false,
       MostrarProfesor: false,
-    
-     
     };
      this.handleClickAlumno = this.handleClickAlumno.bind(this);
      this.handleClickProfesor = this.handleClickProfesor.bind(this);
@@ -38,8 +35,6 @@ class App extends React.Component {
     }));
   }
 
-  
-  
   render() {
     const MostarALumno = <Alumno/>;
     const MostrarProfesor = <Profesor/>;
@@ -53,11 +48,12 @@ class App extends React.Component {
           <button className="btn btn-outline-info">Calificaciones</button>
         </div>
       <>
-       
-        <h2>{this.state.MostarALumno?MostarALumno:true}</h2>
-        <h2>{this.state.MostrarProfesor?MostrarProfesor:true}</h2>
+       {/* <div className='col-md-6'> */}
+       <div className="id_div"> {this.state.MostarALumno?MostarALumno:true} </div>
+       <div className="id_div"> {this.state.MostrarProfesor?MostrarProfesor:true} </div>
+       {/* </div> */}
       
-      </>
+     </>
       
         
       </div>

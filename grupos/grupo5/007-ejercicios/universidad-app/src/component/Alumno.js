@@ -1,4 +1,5 @@
 import React, {Component }from 'react';
+import './Alumno.css';
 
 import datos from '../datos/index';
 import "bootstrap/dist/css/bootstrap.min.css";
@@ -18,14 +19,15 @@ export default class Alumno extends Component{
     constructor(props){
         super(props);
         this.state={
-       
-            //vistaActual: 'alumnos',
+           //vistaActual: 'alumnos',
              idDetalleSeleccionado: -1,
             alumnos: datos.alumnos,
             setVistaActual:this.setVistaActual,
             remove: this.remove,
             vistaActual:true,
             modalInsertar: false,
+            modalActualizar: false,
+
           form:{
             nombre:"",
             edad: "",
@@ -33,7 +35,6 @@ export default class Alumno extends Component{
 
         };
         this.handleClick = this.handleClick.bind(this);
-  
     }
 
     handleClick() {
@@ -41,6 +42,17 @@ export default class Alumno extends Component{
         vistaActual: !state.vistaActual
       }));
     }
+
+    mostrarModalGet= (alumnos) => {
+      this.setState({
+        form: alumnos,
+        modalGet: true,
+      });
+    };
+  
+    cerrarModalGet= () => {
+      this.setState({ modalGet: false });
+    };
 
     mostrarModalInsertar = () => {
       this.setState({
@@ -69,10 +81,10 @@ export default class Alumno extends Component{
   }
 
  remove = (alumnos) => {
-    var opcion = window.confirm("Estás Seguro que deseas Eliminar el elemento "+alumnos.id);
+    let opcion = window.confirm("Estás Seguro que deseas Eliminar el elemento "+alumnos.id);
     if (opcion === true) {
-      var contador = 0;
-      var temp = this.state.alumnos;
+      let contador = 0;
+      let temp = this.state.alumnos;
        temp.map((element) => {
         if (alumnos.id === element.id) {
           temp.splice(contador, 1);
@@ -83,8 +95,21 @@ export default class Alumno extends Component{
     }
   };
 
-  
-   create= ()=>{
+
+  get = (alumnos) => {
+    let contador=0;
+   let arreglo = this.state.alumnos;
+    arreglo.map((registro) => {
+      if (alumnos.id == registro.id) {
+        arreglo[contador].nombre = alumnos.nombre;
+        arreglo[contador].edad = alumnos.nombre;
+      }
+      contador++;
+     });
+    this.setState({arreglo, modalGet: false });
+  };
+
+  create= ()=>{
     var createNew= {...this.state.form};
     createNew.id=this.state.alumnos.length+1;
     var lista= this.state.alumnos;
@@ -103,8 +128,8 @@ export default class Alumno extends Component{
   };
 
   render(){
-  const vistaActual =  <div>
-  <table border="1">
+  const vistaActual =  <div className="mainView">
+  <table border="1" >
  <thead>
    <tr>
      <th>Id</th>
@@ -115,8 +140,8 @@ export default class Alumno extends Component{
  <tbody>
    {this.state.alumnos.map((element)=>(
      <tr key={element.id}>
-       <td>{element.id}</td>
-       <td>{element.nombre}</td>
+       <td >{element.id}</td>
+       <td onClick={() => this.mostrarModalGet(element)}>{element.nombre}</td>
        <td>{element.edad}</td>
        <td><button color="danger" onClick={()=> this.remove(element)}>Eliminar</button></td>{"  "}
      </tr>
@@ -132,6 +157,64 @@ return (
     <Button color="success" onClick={()=>this.mostrarModalInsertar()}>Cargar Alumno</Button>
    <div className="mainView">{this.state.vistaActual?vistaActual:true}</div>  
       
+        {/*Modal para ver el alumno */}
+   <Modal isOpen={this.state.modalGet}>
+          <ModalHeader>
+           <div><h3>Registro de Alumno</h3></div>
+          </ModalHeader>
+
+          <ModalBody>
+            <FormGroup>
+              <label>
+               Id:
+              </label>
+            
+              <input
+                className="form-control"
+                readOnly
+                type="text"
+                value={this.state.form.id}
+              />
+            </FormGroup>
+            
+            <FormGroup>
+              <label>
+                Alumno: 
+              </label>
+              <input
+                className="form-control"
+                name="alumno"
+                type="text"
+                onChange={this.handleChange}
+                value={this.state.form.nombre}
+              />
+            </FormGroup>
+            
+            <FormGroup>
+              <label>
+                Edad: 
+              </label>
+              <input
+                className="form-control"
+                name="edad"
+                type="text"
+                onChange={this.handleChange}
+                value={this.state.form.edad}
+              />
+            </FormGroup>
+          </ModalBody>
+
+          <ModalFooter>
+            <Button
+              color="danger"
+              onClick={() => this.cerrarModalGet()}
+            >
+              Cancelar
+            </Button>
+          </ModalFooter>
+        </Modal>
+
+			      {/* para ingresar alumno */}
    <Modal isOpen={this.state.modalInsertar}>
           <ModalHeader>
            <div><h3>Ingresar Alumno</h3></div>

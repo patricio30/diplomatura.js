@@ -1,5 +1,15 @@
 .App {
   text-align: center;
+
+}
+h2 {
+  text-align: center;
+  justify-content: space-evenly;
+}
+
+.id_div{
+  text-align: center;
+  justify-content: space-evenly;
 }
 
 .App-header {
